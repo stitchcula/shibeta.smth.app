@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">智能家园管家 beta</string>
+    <string name="action_settings">设置</string>
+    <string name="action_close">退出</string>
+    <string name="tip_toAddDevice">请点击下面的+添加您的设备。</string>
+    <string name="explain_createWifi">您的SMTH将使用下面这个wifi连接互联网。该信息不会被上传和收集。</string>
+    <string name="title_createWifi">添加wifi配置</string>
+    <string name="title_scanQR">扫描绑定SMTH</string>
+    <string name="createWifiSsid">SSID</string>
+    <string name="createWifiPwd">密码</string>
+</resources>
