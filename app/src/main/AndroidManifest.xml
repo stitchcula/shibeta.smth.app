@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.shibeta.smth" >
+    package="org.shibeta.smth" >
 
     <application
         android:allowBackup="true"
@@ -21,21 +21,22 @@
         <activity
             android:name=".ACreateWifiCfg"
             android:label="@string/title_createWifi"
-            android:parentActivityName="com.shibeta.smth.MainActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"
+            android:parentActivityName="org.shibeta.smth.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.shibeta.smth.MainActivity" />
+                android:value="org.shibeta.smth.MainActivity" />
         </activity>
 
         <activity
             android:name=".AScanQR"
             android:label="@string/title_scanQR"
-            android:parentActivityName="com.shibeta.smth.MainActivity"
+            android:parentActivityName="org.shibeta.smth.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.shibeta.smth.MainActivity" />
+                android:value="org.shibeta.smth.MainActivity" />
         </activity>
 
     </application>
@@ -43,6 +44,8 @@
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <uses-feature android:name="android.hardware.camera"/>

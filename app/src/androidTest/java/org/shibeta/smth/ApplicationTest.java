@@ -1,4 +1,4 @@
-package com.shibeta.smth;
+package org.shibeta.smth;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

@@ -1,4 +1,4 @@
-package com.shibeta.smth;
+package org.shibeta.smth;
 
 /**
  * Created by stitchcula on 2016/4/13.

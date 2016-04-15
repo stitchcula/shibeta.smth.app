@@ -5,11 +5,11 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "com.shibeta.smth"
-        minSdkVersion 15
+        applicationId "org.shibeta.smth"
+        minSdkVersion 16
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        versionCode 241
+        versionName "1.2"
     }
     buildTypes {
         release {
@@ -25,6 +25,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
     compile 'com.android.support:cardview-v7:23.1.1'
+    compile 'com.android.support:recyclerview-v7:23.1.1'
     //compile 'com.github.navasmdc:MaterialDesign:1.5@aar'
     compile 'me.dm7.barcodescanner:zbar:1.5'
 }

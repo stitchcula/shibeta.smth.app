@@ -1,4 +1,4 @@
-package com.shibeta.smth;
+package org.shibeta.smth;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import java.util.regex.Pattern;
 
 import me.dm7.barcodescanner.core.ViewFinderView;
 import me.dm7.barcodescanner.zbar.Result;
@@ -20,27 +22,23 @@ public class AScanQR extends AppCompatActivity implements ZBarScannerView.Result
     protected ZBarScannerView scannerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        startActivityForResult(new Intent(AScanQR.this,ACreateWifiCfg.class),M.createWifiCfg);
         super.onCreate(savedInstanceState);
         scannerView=new ZBarScannerView(this);
-        scannerView.stopCamera();
-        //ViewFinderView finderView=new ViewFinderView(this);
-        //View view= LayoutInflater.from(this).inflate(R.layout.scan_qr,null);
-        //finderView.addView(view);
-        //ZBarScannerView.init(finderView);
+        View view= LayoutInflater.from(this).inflate(R.layout.scan_qr,null);
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.scan_qr_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        LinearLayout includeLayout=(LinearLayout) view.findViewById(R.id.scan_qr_includeLayout);
+        includeLayout.addView(scannerView);
+        setContentView(view);
     }
     @Override
     protected void onActivityResult(int reqCode,int resCode,Intent data){
-        super.onActivityResult(reqCode,resCode,data);
+        super.onActivityResult(reqCode, resCode, data);
         if(reqCode==M.createWifiCfg){
             if(resCode==200){
-                View view= LayoutInflater.from(this).inflate(R.layout.scan_qr,null);
-                Toolbar toolbar = (Toolbar) view.findViewById(R.id.scan_qr_toolbar);
-                setSupportActionBar(toolbar);
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                LinearLayout includeLayout=(LinearLayout) view.findViewById(R.id.scan_qr_includeLayout);
-                includeLayout.addView(scannerView);
-                setContentView(view);
+                setResult(200);
+                finish();
             }
             if(resCode==500){
                 finish();
@@ -49,11 +47,14 @@ public class AScanQR extends AppCompatActivity implements ZBarScannerView.Result
     }
     @Override
     public void handleResult(Result rawRes){
-        Intent intent=new Intent();
-        intent.putExtra("data",rawRes.getContents());
-        intent.putExtra("format",rawRes.getBarcodeFormat().getName());
-        setResult(200,intent);
-        finish();
+        scannerView.stopCamera();
+        CStore store=new CStore(AScanQR.this);
+        String[] arr=rawRes.getContents().split("=");
+        String reg="^[0-9]{8}$";
+        if(Pattern.matches(reg,arr[1])) {
+            store.set("chipId", arr[1]);
+            startActivityForResult(new Intent(AScanQR.this, ACreateWifiCfg.class), M.createWifiCfg);
+        }
     }
     @Override
     protected void onResume(){
